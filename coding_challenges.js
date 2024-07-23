@@ -119,7 +119,7 @@ function StringChallenge(str) {
   }
 }
 
-//#2 (2 wrong)
+//#2 8/10
 function StringChallenge(str) {
   let indexA = 1
   let indexB = 0
@@ -271,4 +271,133 @@ function MathChallenge(num) {
   return count
 }
 
-//#7
+//#7 8/10
+function ArrayChallenge(arr) {
+  let spaces = 0
+  let enemy = []
+  let hero
+
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === 1) {
+      hero = i
+    } else if (arr[i] === 2) {
+      enemy.push(i)
+    }
+  }
+
+  for (let j = 0; j < enemy.length; j++) {
+    if (enemy.length === 0) {
+      return spaces
+    } else if (Math.abs(enemy[j] - hero) > Math.abs(enemy[j + 1] - hero)) {
+      enemy.splice(j, 1)
+    } else if (Math.abs(enemy[j] - hero) < Math.abs(enemy[j - 1] - hero)) {
+      enemy.splice(j - 1, 1)
+    }
+    spaces = Math.abs(enemy[0] - hero)
+  }
+  return spaces
+}
+
+//#8 9/10
+function SearchingChallenge(str) {
+  const userName = str.split("")
+
+  for (let i = 0; i < userName.length; i++) {
+    if (
+      userName.length >= 4 &&
+      userName.length <= 25 &&
+      userName[0].match(/[a-z]/i) &&
+      userName[i].match(/[a-zA-Z0-9_]$/) &&
+      userName.length - 1 != "_"
+    ) {
+      return true
+    } else {
+      return false
+    }
+  }
+}
+
+//#9 8/10
+function ArrayChallenge(arr) {
+  let largest = 0
+  let largestIndex
+  let total = 0
+  let equals
+  // find the largest number
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] > largest) {
+      largest = arr[i]
+      largestIndex = i
+    }
+    total += arr[i]
+  }
+
+  if (arr[largestIndex] === largest) {
+    arr.splice(largestIndex, 1)
+  }
+  console.log(
+    "largest",
+    largest,
+    "total",
+    total,
+    "arr",
+    arr,
+    "index",
+    largestIndex,
+  )
+  // add up the other numbers to determine if any sum can equal the largest
+  let sumTotal = total - largest
+  console.log("total", total, "sumTotal", sumTotal)
+
+  for (let j = 0; j < arr.length; j++) {
+    if (sumTotal - arr[j] === largest) {
+      equals = true
+      break
+    } else {
+      equals = false
+    }
+  }
+  return equals
+}
+
+//#10
+function StringChallenge(strArr) {
+  const firstEl = strArr[0].split("")
+  const secondEl = parseInt(strArr[1])
+  let newArr = new Array(secondEl)
+  let down = true
+  let row = 0
+
+  if (firstEl.length < secondEl) {
+    return strArr[0]
+  }
+
+  for (let i = 0; i < secondEl; i++) {
+    newArr[i] = ""
+  }
+
+  let newStrReturn = ""
+
+  for (let i = 0; i < firstEl.length; ++i) {
+    newArr[row] += firstEl[i]
+
+    if (row == secondEl - 1) {
+      down = false
+    } else if (row == 0) {
+      down = true
+    }
+
+    if (down) {
+      row++
+    } else {
+      row--
+    }
+  }
+
+  for (let j = 0; j < newArr.length; j++) {
+    newStrReturn += newArr[j]
+  }
+  return newStrReturn
+}
+
+//#11
