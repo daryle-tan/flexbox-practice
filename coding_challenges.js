@@ -360,7 +360,7 @@ function ArrayChallenge(arr) {
   return equals
 }
 
-//#10
+//#10 9/10
 function StringChallenge(strArr) {
   const firstEl = strArr[0].split("")
   const secondEl = parseInt(strArr[1])
@@ -400,4 +400,54 @@ function StringChallenge(strArr) {
   return newStrReturn
 }
 
-//#11
+//#11 7/10
+function ArrayChallenge(arr) {
+  // hunger level 0 - 5
+  // sandwiches 1 -20
+  let sandwiches = arr.shift()
+  // determine how many sandwiches to feed which person based on their hunger
+  function hungerLevelNotSame(arr) {
+    let sorted = arr.slice().sort()
+    return sorted[0] != sorted[arr.length - 1]
+  }
+
+  function largestDifference(arr) {
+    let differences = []
+    for (let i = 0; i < arr.length - 1; i++) {
+      differences.push(Math.abs(arr[i] - arr[i + 1]))
+    }
+    return differences.sort(function (a, b) {
+      return b - a
+    })[0]
+  }
+
+  function whoToFeed(arr, num) {
+    for (let i = 0; i < arr.length - 1; i++) {
+      if (Math.abs(arr[i] - arr[i + 1]) >= num) {
+        arr[i] > arr[i + 1] ? arr[i]-- : arr[i + 1]--
+        sandwiches--
+      }
+      if (sandwiches === 0 || !hungerLevelNotSame(arr)) break
+    }
+  }
+
+  for (let i = sandwiches; i > 0 && hungerLevelNotSame(arr); i--) {
+    if (largestDifference(arr) >= 3) {
+      whoToFeed(arr, 3)
+    } else if (largestDifference(arr) === 2) {
+      whoToFeed(arr, 2)
+    } else if (largestDifference(arr) === 1) {
+      whoToFeed(arr, 1)
+    }
+  }
+
+  return arr
+    .map(function (x, i, arr) {
+      return arr[i + 1] === undefined ? 0 : Math.abs(x - arr[i + 1])
+    })
+    .reduce(function (a, b) {
+      return a + b
+    })
+}
+
+//#12
