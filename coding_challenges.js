@@ -450,4 +450,44 @@ function ArrayChallenge(arr) {
     })
 }
 
-//#12
+//#12 5/5
+function SearchingChallenge(strArr) {
+  let strArrSize = strArr.length
+  let rowSize
+  let holes = 0
+  let innerArr = []
+  let combineArr = []
+  console.log("strArrSize", strArrSize)
+  for (let i = 0; i < strArr.length; i++) {
+    innerArr.push(strArr[i].split(""))
+  }
+  strArrSize = strArrSize * innerArr[0].length
+  rowSize = innerArr[0].length
+
+  for (let i = 0; i < innerArr.length; i++) {
+    for (let j = 0; j < innerArr[i].length; j++) {
+      combineArr.push(innerArr[i][j])
+    }
+  }
+  console.log(combineArr, "combined")
+  console.log("innerArr", innerArr, strArrSize, rowSize)
+  for (let i = 0; i < combineArr.length; i++) {
+    if (
+      combineArr[i] == 0 &&
+      combineArr[i + 1] == 0 &&
+      combineArr[i - 1] != 0
+    ) {
+      holes++
+
+      console.log("next el", combineArr[i], "holepostion")
+    } else if (combineArr[i] == 0 && combineArr[i + rowSize] == 0) {
+      holes++
+
+      console.log("bottomMatch", i, i + rowSize, combineArr[i])
+    }
+
+    console.log("holes", holes)
+  }
+
+  return holes
+}
