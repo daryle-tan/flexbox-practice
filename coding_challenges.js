@@ -491,3 +491,13 @@ function SearchingChallenge(strArr) {
 
   return holes
 }
+
+// Looping a  triangle
+function loopingTriangle() {
+  let hash
+
+  for (let i = 0; i < 7; i++) {
+    hash += "#"
+    print(hash)
+  }
+}
