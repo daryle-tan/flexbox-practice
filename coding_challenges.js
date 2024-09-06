@@ -501,3 +501,38 @@ function loopingTriangle() {
     print(hash)
   }
 }
+
+// FizzBuzz
+function fizzBuzz() {
+  let num = 1
+
+  while (num <= 100) {
+    if (num % 3 === 0 && num % 5 === 0) {
+      console.log("FizzBuzz")
+    } else if (num % 3 === 0) {
+      console.log("Fizz")
+    } else if (num % 5 === 0) {
+      console.log("Buzz")
+    } else {
+      console.log(num)
+    }
+    num++
+  }
+}
+
+// Chessboard
+function chessBoard(size) {
+  let hash = ""
+
+  for (let i = 0; i < size; i++) {
+    for (let j = 0; j < size; j++) {
+      if ((i + j) % 2 === 0) {
+        hash += " "
+      } else {
+        hash += "#"
+      }
+    }
+    hash += "\n"
+  }
+  console.log(hash)
+}
