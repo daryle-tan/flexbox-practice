@@ -552,3 +552,45 @@ console.log(min(0, -10))
 // → -10
 
 // Recursion
+function isEven(num) {
+  if (num % 2 === 0) {
+    return true
+  } else if (num % 2 === 1) {
+    return false
+  } else {
+    return isEven(Math.abs(num))
+  }
+}
+console.log(isEven(50))
+// → true
+console.log(isEven(75))
+// → false
+console.log(isEven(-1))
+// → false
+
+// Bean Counting
+function countBs(word) {
+  let count = 0
+
+  for (let i = 0; i < word.length; i++) {
+    if (word[i] === "B") {
+      count++
+    }
+  }
+  return count
+}
+
+function countChar(word, char) {
+  let count = 0
+
+  for (let i = 0; i < word.length; i++) {
+    if (word[i] === char) {
+      count++
+    }
+  }
+  return count
+}
+console.log(countBs("BOB"))
+// → 2
+console.log(countChar("kakkerlak", "k"))
+// → 4
