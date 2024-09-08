@@ -594,3 +594,72 @@ console.log(countBs("BOB"))
 // → 2
 console.log(countChar("kakkerlak", "k"))
 // → 4
+
+// Sum of a range
+const range = (num1, num2, step = 1) => {
+  let rangeHolder = []
+  let index = num1
+
+  if (step < 0) {
+    for (let i = index; i >= num2; i += step) {
+      rangeHolder.push(i)
+    }
+  } else {
+    for (let i = index; i <= num2; i += step) {
+      rangeHolder.push(i)
+    }
+  }
+  console.log(num1, rangeHolder)
+  return rangeHolder
+}
+
+const sum = (arr) => {
+  let sum = 0
+  for (let i = 0; i < arr.length; i++) {
+    sum += arr[i]
+  }
+  return sum
+}
+
+console.log(range(1, 10))
+// → [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+console.log(range(5, 2, -1))
+// → [5, 4, 3, 2]
+console.log(sum(range(1, 10)))
+// → 55
+
+// Reversing an array
+function reverseArray(arr) {
+  let newArr = []
+  let moved_char
+  while (arr.length > 0) {
+    moved_char = arr.pop()
+    newArr.push(moved_char)
+  }
+  // console.log(newArr)
+  return newArr
+}
+
+function reverseArrayInPlace(arr) {
+  let first
+  let last
+  let halfLength = Math.floor(arr.length / 2)
+  console.log(halfLength)
+  for (let i = 0; i < halfLength; i++) {
+    first = arr[arr.length - 1 - i]
+    last = arr[i]
+    arr[i] = first
+    arr[arr.length - 1 - i] = last
+    console.log(first, "here", arr[arr.length - 1])
+  }
+}
+
+let myArray = ["A", "B", "C"]
+console.log(reverseArray(myArray))
+// → ["C", "B", "A"];
+console.log(myArray)
+// → ["A", "B", "C"];
+let arrayValue = [1, 2, 3, 4, 5]
+reverseArrayInPlace(arrayValue)
+console.log(arrayValue)
+// → [5, 4, 3, 2, 1]
