@@ -663,3 +663,65 @@ let arrayValue = [1, 2, 3, 4, 5]
 reverseArrayInPlace(arrayValue)
 console.log(arrayValue)
 // → [5, 4, 3, 2, 1]
+
+// A list
+function arrayToList(arr) {
+  list = null
+  for (let i = arr.length - 1; i >= 0; i--) {
+    list = { value: arr[i], rest: list }
+  }
+  // console.log(list)
+  return list
+}
+
+// Converts list to array
+function listToArray(list) {
+  let arr = []
+  let node = list
+  while (node) {
+    // Traverse the linked list
+    arr.push(node.value) // Add the value to the array
+    node = node.rest // Move to the next node
+  }
+  return arr
+}
+
+// Adds an element to the front of the list
+function prepend(element, list) {
+  return { value: element, rest: list } // New list node where value is the element and rest is the original list
+}
+
+// Returns the element at the given position
+function nth(list, n) {
+  if (!list) return undefined // If the list is empty, return undefined
+  else if (n === 0) return list.value // If n is 0, return the current value
+  else return nth(list.rest, n - 1) // Recur on the rest of the list, reducing n
+}
+
+console.log(arrayToList([10, 20]))
+// → {value: 10, rest: {value: 20, rest: null}}
+console.log(listToArray(arrayToList([10, 20, 30])))
+// → [10, 20, 30]
+console.log(prepend(10, prepend(20, null)))
+// → {value: 10, rest: {value: 20, rest: null}}
+console.log(nth(arrayToList([10, 20, 30]), 1))
+// → 20
+
+// Deep comparison
+function deepEqual(a, b) {
+  if (a === b) return true
+
+  if (a == null || typeof a != "object" || b == null || typeof b != "object")
+    return false
+
+  let keysA = Object.keys(a),
+    keysB = Object.keys(b)
+
+  if (keysA.length != keysB.length) return false
+
+  for (let key of keysA) {
+    if (!keysB.includes(key) || !deepEqual(a[key], b[key])) return false
+  }
+
+  return true
+}
