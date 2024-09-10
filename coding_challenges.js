@@ -725,3 +725,57 @@ function deepEqual(a, b) {
 
   return true
 }
+
+// Your own loop
+function loop(value, testFn, updateFn, bodyFn) {
+  while (testFn(value)) {
+    bodyFn(value)
+    value = updateFn(value)
+  }
+}
+
+loop(
+  3,
+  (n) => n > 0,
+  (n) => n - 1,
+  console.log,
+)
+// → 3
+// → 2
+// → 1
+
+// Everything
+function every(array, test) {
+  for (let element of array) {
+    if (!test(element)) return false
+  }
+  return true
+}
+
+function every(array, test) {
+  return !array.some((element) => !test(element))
+}
+
+console.log(every([1, 3, 5], (n) => n < 10))
+// → true
+console.log(every([2, 4, 16], (n) => n < 10))
+// → false
+console.log(every([], (n) => n < 10))
+// → true
+
+// Dominant writing direction
+function dominantDirection(text) {
+  let counted = countBy(text, (char) => {
+    let script = characterScript(char.codePointAt(0))
+    return script ? script.direction : "none"
+  }).filter(({ name }) => name != "none")
+
+  if (counted.length == 0) return "ltr"
+
+  return counted.reduce((a, b) => (a.count > b.count ? a : b)).name
+}
+
+console.log(dominantDirection("Hello!"))
+// → ltr
+console.log(dominjsonantDirection("Hey, مساء الخير"))
+// → rtl
