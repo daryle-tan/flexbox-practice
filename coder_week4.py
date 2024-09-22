@@ -44,3 +44,24 @@ def ThirdGreatest(strArr):
 print(ThirdGreatest(input()))
 
 # Caeser Cipher
+def CaesarCipher(strParam,num):
+  alphabet = 'abcdefghijklmnopqrstuvwxyz'
+  current = ''
+
+  for char in strParam:
+    if char.lower() in alphabet and char.isupper() and char.isalpha():
+      index_of_alpha = alphabet.index(char.lower())
+      new_index = (index_of_alpha + num) % 26
+      current += alphabet[new_index].upper()
+      # print(index_of_alpha)
+    elif char in alphabet and char.isalpha():
+      index_of_alpha = alphabet.index(char)
+      new_index = (index_of_alpha + num) % 26
+      current += alphabet[new_index]   
+    elif char in strParam:
+      current += char   
+    # print(current)
+  return current
+
+# keep this function call here 
+print(CaesarCipher(input()))
