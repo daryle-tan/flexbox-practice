@@ -14,3 +14,20 @@ class Solution:
                 boolean_lst.append(False)
         print(most_candies)
         return boolean_lst
+
+
+class Solution:
+    def canPlaceFlowers(self, flowerbed: List[int], n: int) -> bool:
+        count = 0
+        len_list = len(flowerbed)
+        for i in range(len_list):
+            if flowerbed[i] == 0:
+                # Check if it's the first plot or if the previous plot is empty
+                left_empty = (i == 0 or flowerbed[i-1] == 0)
+                # Check if it's the last plot or if the next plot is empty
+                right_empty = (i == len_list - 1 or flowerbed[i+1] == 0)
+                
+                if left_empty and right_empty:
+                    flowerbed[i] = 1
+                    count += 1
+        return count >= n
